@@ -1,9 +1,16 @@
-import {Router, Request, Response, request} from 'express'
+import { Router } from "express";
+import { CreateUserController } from "./controllers/user/CreateUserController";
+import { AuthUserController } from "./controllers/user/AuthUserController";
+import { GetUserByIdController } from "./controllers/user/GetUserByIdController";
+import { isAuthenticated } from "./middlewares/isAuthenticated";
+import { RemoveUserController } from "./controllers/user/RemoveUserController";
 
-const router = Router()
+const router = Router();
 
-router.get('/test', (request: Request, response: Response) =>{
-    return response.json({ok: true})
-} )
+// User Routes
+router.post("/user", new CreateUserController().handle);
+router.post("/signin", new AuthUserController().handle);
+router.get("/getUserById", isAuthenticated, new GetUserByIdController().handle);
+router.delete("/user/remove", new RemoveUserController().handle)
 
-export {router};
+export { router };
