@@ -11,8 +11,6 @@ export function isAuthenticated(
   const authToken = request.headers.authorization;
 
   if (!authToken) {
-    console.log('caiu aqui')
-
     return response.sendStatus(401).end();
   }
 
