@@ -45,19 +45,6 @@ model Product {
 
   category   Category? @relation(fields: [categoryId], references: [id])
   categoryId String
-  items      Item[]
 
   @@map("products")
-}
-
-model Item {
-  id         String    @id @default(uuid())
-  amount     Int
-  created_at DateTime? @default(now())
-  updated_at DateTime? @default(now())
-
-  Product   Product? @relation(fields: [productId], references: [id])
-  productId String
-
-  @@map("items")
 }
